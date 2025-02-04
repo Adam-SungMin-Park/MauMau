@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 @Entity
 @Getter
 @NoArgsConstructor
+@Table
 public class Board {
 
     @Id
