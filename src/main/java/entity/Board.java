@@ -1,10 +1,8 @@
-package com.example.demo.Entity;
+package entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.sql.Timestamp;
 
 @Entity
 @Getter
@@ -21,5 +19,11 @@ public class Board {
 
     @Column
     private String boardContent;
+
+    private Member member;
+
+    public Board(Member member){
+        this.member = member;
+    }
 
 }
