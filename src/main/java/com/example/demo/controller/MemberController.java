@@ -1,7 +1,7 @@
-package controller;
+package com.example.demo.controller;
 
-import dto.MemberRequestDto;
-import service.MemberService;
+import com.example.demo.dto.MemberRequestDto;
+import com.example.demo.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

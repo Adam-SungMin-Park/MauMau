@@ -1,6 +1,6 @@
-package dto;
+package com.example.demo.dto;
 
-import entity.Board;
+import com.example.demo.entity.Board;
 import lombok.Getter;
 import lombok.Setter;
 

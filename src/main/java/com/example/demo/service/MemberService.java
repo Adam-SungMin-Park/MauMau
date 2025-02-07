@@ -1,13 +1,14 @@
-package service;
+package com.example.demo.service;
 
-import dto.MemberRequestDto;
-import entity.Member;
-import repository.MemberRepository;
+import com.example.demo.dto.MemberRequestDto;
+import com.example.demo.entity.Member;
+import com.example.demo.repository.MemberRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
-
+@Service
 @AllArgsConstructor
 public class MemberService {
 
