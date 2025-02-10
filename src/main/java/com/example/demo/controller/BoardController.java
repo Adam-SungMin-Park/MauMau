@@ -30,10 +30,10 @@ public class BoardController {
         return boardService.deleteBoard(boardId);
     }
 
-    /*@PutMapping("/edit/{boardId}")
-    public ResponseEntity<?> editBoard(@RequestBody BoardRequestDto requestDto){
-
-    }*/
+    @PutMapping("/edit/{boardId}")
+    public ResponseEntity<?> editBoard(@PathVariable Long boardId, @RequestBody BoardRequestDto requestDto){
+        return boardService.editBoard(boardId,requestDto);
+    }
 
     /*@PutMapping("/edit")
     public ResponseEntity<?> editBoard(Long boardId,BoardRequestDto requestDto){

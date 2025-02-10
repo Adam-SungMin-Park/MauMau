@@ -34,15 +34,18 @@ public class BoardService {
         }
         Board board = boardRepository.getReferenceById(boardId);
         boardRepository.deleteById(boardId);
+
         return new ResponseEntity<>("board has been deleted!", HttpStatus.OK);
     }
 
-    /*public ResponseEntity<?> editBoard(Long boardId, BoardRequestDto requestDto) {
+    public ResponseEntity<?> editBoard(Long boardId, BoardRequestDto requestDto) {
+        if(!boardRepository.existsById(boardId)){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("board does not exist ID: "+boardId);
+        };
         Board board = boardRepository.getReferenceById(boardId);
-        board.update(requestDto.getBoardTitle(),requestDto.getBoardContent());
+        board.update(requestDto);
 
-        boardRepository.deleteById(boardId);
-
-
-    }*/
+        boardRepository.save(board);
+        return new ResponseEntity<>("Updated", HttpStatus.OK);
+    }
 }
