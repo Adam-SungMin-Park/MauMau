@@ -24,7 +24,6 @@ public class BoardService {
     };
 
     public ResponseEntity<?> saveBoard(BoardRequestDto requestDto) {
-        System.out.println("Servicesss");
         Board board = boardRepository.save(new Board(requestDto));
         return new ResponseEntity<>(board.getBoardId(), HttpStatus.OK);
     }

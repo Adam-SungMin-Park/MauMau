@@ -18,6 +18,7 @@ public class MemberService {
         Member member = Member.builder()
                 .memberUserName(memberRequestDto.getMemberUserName())
                 .memberEmail(memberRequestDto.getMemberEmail())
+                .password(memberRequestDto.getPassword())
                 .build();
         memberRepository.save(member);
     return new ResponseEntity<>("sign up completed", HttpStatus.CREATED);
