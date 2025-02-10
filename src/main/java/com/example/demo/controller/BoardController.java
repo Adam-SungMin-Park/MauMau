@@ -18,6 +18,11 @@ public class BoardController {
         return boardService.getBoard();
     };
 
+    @GetMapping("/{boardId}")
+    public ResponseEntity<?> getBoard(@PathVariable Long boardId){
+        return boardService.getBoardById(boardId);
+    }
+
     @PostMapping("/save")
     public ResponseEntity<?> saveBoard (@RequestBody BoardRequestDto requestDto){
         System.out.println("Controller");
@@ -34,12 +39,6 @@ public class BoardController {
     public ResponseEntity<?> editBoard(@PathVariable Long boardId, @RequestBody BoardRequestDto requestDto){
         return boardService.editBoard(boardId,requestDto);
     }
-
-    /*@PutMapping("/edit")
-    public ResponseEntity<?> editBoard(Long boardId,BoardRequestDto requestDto){
-        return boardService.editBoard(boardId,requestDto);
-    }*/
-
 
 }
 

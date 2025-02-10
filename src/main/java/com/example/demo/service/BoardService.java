@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.dto.BoardRequestDto;
+import com.example.demo.dto.BoardResponseDto;
 import com.example.demo.entity.Board;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -47,5 +48,14 @@ public class BoardService {
 
         boardRepository.save(board);
         return new ResponseEntity<>("Updated", HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> getBoardById(Long boardId) {
+        Board board = boardRepository.getReferenceById(boardId);
+        if(!boardRepository.existsById(boardId)){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("board does not exist ID: "+boardId);
+        };
+        BoardResponseDto responseDto = new BoardResponseDto(board);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 }
