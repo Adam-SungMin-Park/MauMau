@@ -26,9 +26,14 @@ public class BoardController {
 
     @DeleteMapping("/{boardId}")
     public ResponseEntity<?> deleteBoard(@PathVariable Long boardId){
-        System.out.println(boardId);
+        System.out.printf("%d has been called",boardId);
         return boardService.deleteBoard(boardId);
     }
+
+    /*@PutMapping("/edit/{boardId}")
+    public ResponseEntity<?> editBoard(@RequestBody BoardRequestDto requestDto){
+
+    }*/
 
     /*@PutMapping("/edit")
     public ResponseEntity<?> editBoard(Long boardId,BoardRequestDto requestDto){
