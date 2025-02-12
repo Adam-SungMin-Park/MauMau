@@ -25,11 +25,10 @@ public class Board {
     public Board(BoardRequestDto requestDto){
         this.boardTitle = requestDto.getBoardTitle();
         this.boardContent = requestDto.getBoardContent();
-
     }
 
-    /*public void update(String boardTitle,String boardContent) {
-        this.boardContent = boardContent;
-        this.boardTitle = boardTitle;
-    }*/
+    public void update(@NotNull BoardRequestDto requestDto) {
+        this.boardContent =requestDto.getBoardContent();
+        this.boardTitle = requestDto.getBoardTitle();
+    }
 }

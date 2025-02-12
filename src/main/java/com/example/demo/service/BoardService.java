@@ -2,7 +2,9 @@ package com.example.demo.service;
 
 
 import com.example.demo.dto.BoardRequestDto;
+import com.example.demo.dto.BoardResponseDto;
 import com.example.demo.entity.Board;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import com.example.demo.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,26 +24,37 @@ public class BoardService {
     };
 
     public ResponseEntity<?> saveBoard(BoardRequestDto requestDto) {
-        System.out.println("Servicesss");
         Board board = boardRepository.save(new Board(requestDto));
         return new ResponseEntity<>(board.getBoardId(), HttpStatus.OK);
     }
 
     public ResponseEntity<?> deleteBoard(Long boardId) {
-        Board board = boardRepository.getReferenceById(boardId);
-        if(board.getBoardTitle().isEmpty()){
-            return new ResponseEntity<>("board does not exist", HttpStatus.BAD_REQUEST);
+        if(!boardRepository.existsById(boardId)){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("board does not exist ID: "+boardId);
         }
+        Board board = boardRepository.getReferenceById(boardId);
         boardRepository.deleteById(boardId);
-        return new ResponseEntity<>("board {boardId} has been deleted!", HttpStatus.OK);
+
+        return new ResponseEntity<>("board has been deleted!", HttpStatus.OK);
     }
 
-    /*public ResponseEntity<?> editBoard(Long boardId, BoardRequestDto requestDto) {
+    public ResponseEntity<?> editBoard(Long boardId, BoardRequestDto requestDto) {
+        if(!boardRepository.existsById(boardId)){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("board does not exist ID: "+boardId);
+        };
         Board board = boardRepository.getReferenceById(boardId);
-        board.update(requestDto.getBoardTitle(),requestDto.getBoardContent());
+        board.update(requestDto);
 
-        boardRepository.deleteById(boardId);
+        boardRepository.save(board);
+        return new ResponseEntity<>("Updated", HttpStatus.OK);
+    }
 
-
-    }*/
+    public ResponseEntity<?> getBoardById(Long boardId) {
+        Board board = boardRepository.getReferenceById(boardId);
+        if(!boardRepository.existsById(boardId)){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("board does not exist ID: "+boardId);
+        };
+        BoardResponseDto responseDto = new BoardResponseDto(board);
+        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+    }
 }

@@ -18,6 +18,11 @@ public class BoardController {
         return boardService.getBoard();
     };
 
+    @GetMapping("/{boardId}")
+    public ResponseEntity<?> getBoard(@PathVariable Long boardId){
+        return boardService.getBoardById(boardId);
+    }
+
     @PostMapping("/save")
     public ResponseEntity<?> saveBoard (@RequestBody BoardRequestDto requestDto){
         System.out.println("Controller");
@@ -26,15 +31,14 @@ public class BoardController {
 
     @DeleteMapping("/{boardId}")
     public ResponseEntity<?> deleteBoard(@PathVariable Long boardId){
-        System.out.println(boardId);
+        System.out.printf("%d has been called",boardId);
         return boardService.deleteBoard(boardId);
     }
 
-    /*@PutMapping("/edit")
-    public ResponseEntity<?> editBoard(Long boardId,BoardRequestDto requestDto){
+    @PutMapping("/edit/{boardId}")
+    public ResponseEntity<?> editBoard(@PathVariable Long boardId, @RequestBody BoardRequestDto requestDto){
         return boardService.editBoard(boardId,requestDto);
-    }*/
-
+    }
 
 }
 

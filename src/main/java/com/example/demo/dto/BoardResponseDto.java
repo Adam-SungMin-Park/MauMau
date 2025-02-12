@@ -8,6 +8,8 @@ import lombok.Setter;
 @Setter
 public class BoardResponseDto {
 
+    private Long boardId;
+
     private String boardTitle;
 
     private String boardContent;
@@ -15,5 +17,6 @@ public class BoardResponseDto {
     public BoardResponseDto(Board board){
         this.boardContent = board.getBoardContent();
         this.boardTitle = board.getBoardTitle();
+        this.boardId =  board.getBoardId();
     }
 }
